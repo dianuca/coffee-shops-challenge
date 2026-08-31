@@ -1,9 +1,30 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+import Foundation
 
 @main
-struct coffee_shops_challenge {
+struct CoffeeShopsChallenge {
     static func main() {
-        print("Hello, world!")
+        let arguments = CommandLine.arguments
+
+        guard arguments.count == 4 else {
+            print("Usage: coffee-shops-challenge <x> <y> <csv_url>")
+            exit(EXIT_FAILURE)
+        }
+
+        guard let x = Double(arguments[1]),
+              let y = Double(arguments[2]) else {
+            print("Error: X and Y must be valid numbers.")
+            exit(EXIT_FAILURE)
+        }
+
+        let userCoordinate = Coordinate(x: x, y: y)
+
+        guard let url = URL(string: arguments[3]) else {
+            print("Error: Invalid URL.")
+            exit(EXIT_FAILURE)
+        }
+
+        print("X: \(userCoordinate.x)")
+        print("Y: \(userCoordinate.y)")
+        print("URL: \(url)")
     }
 }
