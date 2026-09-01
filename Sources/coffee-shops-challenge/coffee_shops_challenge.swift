@@ -27,6 +27,10 @@ struct CoffeeShopsChallenge {
                 exit(EXIT_FAILURE)
             }
             let coffeeShops = parseCoffeeShops(from: csv)
+            if coffeeShops.isEmpty{
+                print("Error: No valid coffee shops found.")
+                exit(EXIT_FAILURE)
+            }
             var shopsWithDistance: [(shop: CoffeeShop, distance: Double)] = []
             for shop in coffeeShops {
                 let distance = userCoordinate.distance(to: shop.coordinate)
