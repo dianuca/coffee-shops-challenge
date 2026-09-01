@@ -2,7 +2,9 @@ import Foundation
 
 @main
 struct CoffeeShopsChallenge {
-    static func main() {
+
+    static func main() async {
+
         let arguments = CommandLine.arguments
 
         guard arguments.count == 4 else {
@@ -23,8 +25,22 @@ struct CoffeeShopsChallenge {
             exit(EXIT_FAILURE)
         }
 
-        print("X: \(userCoordinate.x)")
-        print("Y: \(userCoordinate.y)")
-        print("URL: \(url)")
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+
+            guard let csv = String(data: data, encoding: .utf8) else {
+                print("Error: Unable to read CSV data.")
+                exit(EXIT_FAILURE)
+            }
+
+            let coffeeShops = parseCoffeeShops(from: csv)
+
+            print("Loaded \(coffeeShops.count) coffee shops.")
+            print("User location: \(userCoordinate.x), \(userCoordinate.y)")
+
+        } catch {
+            print("Error: Could not download CSV file.")
+            exit(EXIT_FAILURE)
+        }
     }
 }
