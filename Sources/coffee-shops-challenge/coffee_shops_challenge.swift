@@ -29,7 +29,7 @@ struct CoffeeShopsChallenge {
             let coffeeShops = parseCoffeeShops(from: csv)
             var shopsWithDistance: [(shop: CoffeeShop, distance: Double)] = []
             for shop in coffeeShops {
-                let distance = userCoordinate.distace(to: shop.coordinate)
+                let distance = userCoordinate.distance(to: shop.coordinate)
                 shopsWithDistance.append((shop, distance))
             }
             shopsWithDistance.sort{

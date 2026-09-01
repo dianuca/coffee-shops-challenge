@@ -12,7 +12,7 @@ struct Coordinate {
     let y: Double
     
     //distanta euclidiana
-    func distace(to other: Coordinate) -> Double{
+    func distance(to other: Coordinate) -> Double{
         let deltaX = other.x - x
         let deltaY = other.y - y
         return sqrt(deltaX * deltaX + deltaY * deltaY)
