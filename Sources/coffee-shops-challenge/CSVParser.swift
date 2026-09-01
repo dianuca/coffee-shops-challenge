@@ -27,8 +27,8 @@ func parseCoffeeShops(from csv: String) -> [CoffeeShop]? {
         let name = values[0].trimmingCharacters(in: .whitespaces)
         //convert the coordinate values from String to Double
         guard !name.isEmpty,
-              let y = Double(values[1].trimmingCharacters(in: .whitespaces)),
-              let x = Double(values[2].trimmingCharacters(in: .whitespaces)) else {
+              let x = Double(values[1].trimmingCharacters(in: .whitespaces)),
+              let y = Double(values[2].trimmingCharacters(in: .whitespaces)) else {
             return nil
         }
         //create the coordinates and coffee shop objects
