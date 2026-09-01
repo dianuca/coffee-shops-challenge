@@ -1,7 +1,4 @@
 # Coffee Shops Challenge
-
-Swift command-line solution for the Agile Freaks Coding Challenge.
-
 ## Challenge
 
 Given:
