@@ -11,7 +11,7 @@ import Foundation
 struct Coordinate {
     let x: Double
     let y: Double
-    //calculates the euclidian distance between two points
+    // calculates the euclidean distance between two points
     func distance(to other: Coordinate) -> Double{
         let deltaX = other.x - x
         let deltaY = other.y - y

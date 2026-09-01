@@ -25,7 +25,7 @@ struct CoffeeShopsChallenge {
         do {
             //download the csv file from the url
             let (data, _) = try await URLSession.shared.data(from: url)
-            //convert the downloaded data into a stirng
+            // convert the downloaded data into a string
             guard let csv = String(data: data, encoding: .utf8) else {
                 print("Error: Unable to read CSV data.")
                 exit(EXIT_FAILURE)
@@ -40,10 +40,10 @@ struct CoffeeShopsChallenge {
                 print("Error: Not enough coffee shops.")
                 exit(EXIT_FAILURE)
             }
-            //store each coffee shop together with its distance form the user's location
+            // store each coffee shop together with its distance from the user's location
             var shopsWithDistance: [(shop: CoffeeShop, distance: Double)] = []
             for shop in coffeeShops {
-                //calculate the distance between the user and the coffee shop
+                // calculate the distance between the user and the coffee shop
                 let distance = userCoordinate.distance(to: shop.coordinate)
                 shopsWithDistance.append((shop, distance))
             }
@@ -51,7 +51,7 @@ struct CoffeeShopsChallenge {
             shopsWithDistance.sort{
                 $0.distance < $1.distance
             }
-            //tahe only the first 3 coffee shops
+            // take only the first 3 coffee shops
             let closestShops = shopsWithDistance.prefix(3)
             //print the name and distance of each one
             for item in closestShops {
