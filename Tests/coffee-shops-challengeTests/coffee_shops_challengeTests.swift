@@ -21,8 +21,8 @@ final class CoffeeShopsChallengeTests: XCTestCase {
         }
         XCTAssertEqual(coffeeShops.count, 2)
         XCTAssertEqual(coffeeShops[0].name, "Cafe One")
-        XCTAssertEqual(coffeeShops[0].coordinate.x, 10.0)
-        XCTAssertEqual(coffeeShops[0].coordinate.y, 20.0)
+        XCTAssertEqual(coffeeShops[0].coordinate.x, 20.0)
+        XCTAssertEqual(coffeeShops[0].coordinate.y, 10.0)
     }
     
     func testInvalidCSV() {
