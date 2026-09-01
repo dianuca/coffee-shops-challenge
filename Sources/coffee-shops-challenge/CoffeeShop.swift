@@ -6,6 +6,6 @@
 //
 
 struct CoffeeShop{
-    let name: String
-    let coordinate: Coordinate
+    let name: String //the name of the coffee shop
+    let coordinate: Coordinate //the coordinate of the coffee shop
 }

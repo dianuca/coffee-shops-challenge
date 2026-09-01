@@ -15,10 +15,21 @@ final class CoffeeShopsChallengeTests: XCTestCase {
         Cafe One,20.0,10.0
         Cafe Two,30.0,15.0
         """
-        let coffeeShops = parseCoffeeShops(from: csv)
+        guard let coffeeShops = parseCoffeeShops(from: csv) else {
+            XCTFail("CSV should be valid.")
+            return
+        }
         XCTAssertEqual(coffeeShops.count, 2)
         XCTAssertEqual(coffeeShops[0].name, "Cafe One")
         XCTAssertEqual(coffeeShops[0].coordinate.x, 10.0)
         XCTAssertEqual(coffeeShops[0].coordinate.y, 20.0)
+    }
+    
+    func testInvalidCSV() {
+        let csv = """
+        Cafe One,abc,10.0
+        """
+        let coffeeShops = parseCoffeeShops(from: csv)
+        XCTAssertNil(coffeeShops)
     }
 }
