@@ -1,8 +1,35 @@
-import Testing
+import XCTest
 @testable import coffee_shops_challenge
 
-@Test func example() async throws {
-    // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-    // Swift Testing Documentation
-    // https://developer.apple.com/documentation/testing
+final class CoffeeShopsChallengeTests: XCTestCase {
+
+    func testDistance() {
+        let first = Coordinate(x: 0, y: 0)
+        let second = Coordinate(x: 3, y: 4)
+        let distance = first.distance(to: second)
+        XCTAssertEqual(distance, 5.0)
+    }
+
+    func testCSVParser() {
+        let csv = """
+        Cafe One,20.0,10.0
+        Cafe Two,30.0,15.0
+        """
+        guard let coffeeShops = parseCoffeeShops(from: csv) else {
+            XCTFail("CSV should be valid.")
+            return
+        }
+        XCTAssertEqual(coffeeShops.count, 2)
+        XCTAssertEqual(coffeeShops[0].name, "Cafe One")
+        XCTAssertEqual(coffeeShops[0].coordinate.x, 20.0)
+        XCTAssertEqual(coffeeShops[0].coordinate.y, 10.0)
+    }
+    
+    func testInvalidCSV() {
+        let csv = """
+        Cafe One,abc,10.0
+        """
+        let coffeeShops = parseCoffeeShops(from: csv)
+        XCTAssertNil(coffeeShops)
+    }
 }
