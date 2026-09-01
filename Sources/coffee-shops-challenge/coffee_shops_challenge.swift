@@ -4,27 +4,21 @@ import Foundation
 struct CoffeeShopsChallenge {
 
     static func main() async {
-
         let arguments = CommandLine.arguments
-
         guard arguments.count == 4 else {
             print("Usage: coffee-shops-challenge <x> <y> <csv_url>")
             exit(EXIT_FAILURE)
         }
-
         guard let x = Double(arguments[1]),
               let y = Double(arguments[2]) else {
             print("Error: X and Y must be valid numbers.")
             exit(EXIT_FAILURE)
         }
-
         let userCoordinate = Coordinate(x: x, y: y)
-
         guard let url = URL(string: arguments[3]) else {
             print("Error: Invalid URL.")
             exit(EXIT_FAILURE)
         }
-
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
 
@@ -32,12 +26,20 @@ struct CoffeeShopsChallenge {
                 print("Error: Unable to read CSV data.")
                 exit(EXIT_FAILURE)
             }
-
             let coffeeShops = parseCoffeeShops(from: csv)
-
-            print("Loaded \(coffeeShops.count) coffee shops.")
-            print("User location: \(userCoordinate.x), \(userCoordinate.y)")
-
+            var shopsWithDistance: [(shop: CoffeeShop, distance: Double)] = []
+            for shop in coffeeShops {
+                let distance = userCoordinate.distace(to: shop.coordinate)
+                shopsWithDistance.append((shop, distance))
+            }
+            shopsWithDistance.sort{
+                $0.distance < $1.distance
+            }
+            let closestShops = shopsWithDistance.prefix(3)
+            for item in closestShops {
+                print("\(item.shop.name), \(String(format: "%.4f", item.distance))")
+            }
+            
         } catch {
             print("Error: Could not download CSV file.")
             exit(EXIT_FAILURE)
